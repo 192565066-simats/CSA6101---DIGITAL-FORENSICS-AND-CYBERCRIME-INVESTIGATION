@@ -1,0 +1,36 @@
+import hashlib
+
+file_name = "evidence.txt"
+
+# Create a sample evidence file
+with open(file_name, "w") as file:
+    file.write("This is digital evidence.")
+
+# Function to calculate SHA-256 hash
+def calculate_hash(file):
+    sha256 = hashlib.sha256()
+    with open(file, "rb") as f:
+        while chunk := f.read(4096):
+            sha256.update(chunk)
+    return sha256.hexdigest()
+
+# Original hash
+original_hash = calculate_hash(file_name)
+print("Original Hash:")
+print(original_hash)
+
+# Verify integrity
+current_hash = calculate_hash(file_name)
+
+print("\nVerification Result:")
+if original_hash == current_hash:
+    print("Chain of Custody Verified: File is unchanged.")
+else:
+    print("Chain of Custody Failed: File has been modified.")
+
+Sample Output:
+Original Hash:
+c4e7e0b0d4f0e2f2fbc0d2b90e5b82b4b5b50a5b7a6a8f4b1f9f2c9f1d2e3a4b
+
+Verification Result:
+Chain of Custody Verified: File is unchanged.

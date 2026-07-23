@@ -1,0 +1,45 @@
+
+sender = input("Enter sender email: ").lower()
+subject = input("Enter subject: ").lower()
+body = input("Enter email body: ").lower()
+
+phishing_keywords = [
+    "urgent", "verify", "password", "bank", "account",
+    "click here", "login", "update", "winner", "prize",
+    "free", "otp", "limited time"
+]
+
+score = 0
+
+# Check sender
+if not (sender.endswith("@gmail.com") or
+        sender.endswith("@outlook.com") or
+        sender.endswith("@yahoo.com")):
+    score += 1
+
+# Check subject
+for word in phishing_keywords:
+    if word in subject:
+        score += 1
+
+# Check body
+for word in phishing_keywords:
+    if word in body:
+        score += 1
+
+print("\nResult")
+print("------")
+
+if score >= 3:
+    print("⚠ Warning: Possible Phishing Email Detected!")
+else:
+
+Sample Output:
+Enter sender email: security@fake-bank.xyz
+Enter subject: Urgent! Verify Your Account
+Enter email body: Click here to update your password immediately.
+
+Result
+------
+⚠ Warning: Possible Phishing Email Detected!
+    print("✓ Email appears to be Safe.")

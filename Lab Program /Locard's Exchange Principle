@@ -1,0 +1,35 @@
+import os
+import time
+from datetime import datetime
+
+file_name = "evidence.txt"
+
+with open(file_name, "w") as file:
+    file.write("Original evidence.\n")
+
+def show_metadata(file):
+    print("Created :", datetime.fromtimestamp(os.path.getctime(file)))
+    print("Modified:", datetime.fromtimestamp(os.path.getmtime(file)))
+    print("Accessed:", datetime.fromtimestamp(os.path.getatime(file)))
+
+print("Initial Metadata:")
+show_metadata(file_name)
+
+time.sleep(5)
+
+with open(file_name, "a") as file:
+    file.write("Evidence modified.\n")
+
+print("\nUpdated Metadata:")
+show_metadata(file_name)
+
+Sample Output:
+Initial Metadata:
+Created : 2026-07-23 10:30:15
+Modified: 2026-07-23 10:30:15
+Accessed: 2026-07-23 10:30:15
+
+Updated Metadata:
+Created : 2026-07-23 10:30:15
+Modified: 2026-07-23 10:30:20
+Accessed: 2026-07-23 10:30:20

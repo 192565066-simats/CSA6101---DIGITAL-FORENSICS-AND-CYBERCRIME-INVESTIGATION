@@ -1,0 +1,20 @@
+import socket
+
+domain = input("Enter domain name: ")
+
+try:
+    ip_address = socket.gethostbyname(domain)
+    print("\nDNS Lookup Result")
+    print("-----------------")
+    print("Domain Name :", domain)
+    print("IP Address  :", ip_address)
+except socket.gaierror:
+    print("Invalid domain or unable to resolve.")
+
+Sample Output:
+Enter domain name: google.com
+
+DNS Lookup Result
+-----------------
+Domain Name : google.com
+IP Address  : 142.250.193.78
